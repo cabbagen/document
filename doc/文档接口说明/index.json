@@ -1,0 +1,17 @@
+{
+    "name": "index",
+    "comment": "",
+    "interfaces": [
+        {
+            "name": "index      [ String ]",
+            "comment": "      [ String ]",
+            "url": "./demo.json      [ String ]",
+            "method": "      [ String ]",
+            "data": "null      [ Null ]",
+            "returnData": {
+                "name": "Lee      [ String ]",
+                "age": "12      [ Number ]"
+            }
+        }
+    ]
+}

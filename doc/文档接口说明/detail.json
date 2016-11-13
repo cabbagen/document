@@ -1,0 +1,25 @@
+{
+    "name": "detail",
+    "comment": "detail page",
+    "interfaces": [
+        {
+            "name": "demo interfaces      [ String ]",
+            "comment": "demo interfaces      [ String ]",
+            "url": "http://www.project.com:8080/phpDemo/admin/demo.php      [ String ]",
+            "method": "POST      [ String ]",
+            "data": {
+                "name": "xiaoxiao      [ String ]"
+            },
+            "returnData": [
+                {
+                    "name": "xia      [ String ]",
+                    "age": "12      [ Number ]"
+                },
+                {
+                    "name": "su      [ String ]",
+                    "age": "15      [ Number ]"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "name": "list",
+    "comment": "list page",
+    "interfaces": [
+        {
+            "name": "接口1      [ String ]",
+            "comment": "接口1      [ String ]",
+            "url": "http://www.project.com:8080/phpDemo/admin/index.php      [ String ]",
+            "method": "GET      [ String ]",
+            "data": {
+                "name": "xiaoxiao      [ String ]"
+            },
+            "returnData": {
+                "status": "200      [ Number ]",
+                "data": "ok      [ String ]"
+            }
+        },
+        {
+            "name": "接口2      [ String ]",
+            "comment": "接口2      [ String ]",
+            "url": "http://www.project.com:8080/phpDemo/admin/index.php      [ String ]",
+            "method": "GET      [ String ]",
+            "data": "null      [ Null ]",
+            "returnData": {
+                "status": "200      [ Number ]",
+                "data": "no      [ String ]"
+            }
+        }
+    ]
+}
