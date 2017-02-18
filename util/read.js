@@ -11,7 +11,7 @@ var util = require('./util.js');
  * 从文件读取数据
  * @param fromPath {String} 读取的文件目录
  * @param callback {Function} 成功的回调函数
- * 
+ *
  */
 function readFromFile(fromPath, callback) {
 	fs.readFile(fromPath , 'utf8', function(err, data) {
@@ -46,44 +46,47 @@ function readFromHttp(urlAddress, method, options, callback) {
 			port : urlObj.port,
 			path : urlObj.path
 		};
-		
+
 	if(typeof options !== 'undefined') {
 		data = queryString.stringify(options);
 	}
-	
+
 	if(method === 'GET' || method === 'get') {
 		if(data) {
 			headerInfo['path'] += '?' + data;
 		}
 		headerInfo['method'] = 'GET';
 	}
-	
+
 	if(method === 'POST' || method === 'post') {
 		headerInfo['method'] = 'POST';
 		headerInfo['headers'] = {
 			'Content-Type' : 'application/x-www-form-urlencoded',
 			'Content-Length' : data.length
 		}
-		
+
 	}
-	
+
 	var req = http.request(headerInfo, function(res) {
+		var myChunk = '';
 		res.setEncoding('utf8');
 		res.on('data', function(chunk) {
+			myChunk += chunk;
+		});
+		res.on('end', function() {
 			try {
-				var myChunk = JSON.parse(chunk);
-				callback(myChunk);
+				callback( JSON.parse(myChunk) );
 			} catch(e) {
 				console.log(e);
 				throw new Error('使用 JSON 进行数据交换');
 			}
 		});
 	});
-	
+
 	req.on('error', function(err) {
 		console.log(err);
 	});
-	
+
 	if( headerInfo['method'] === 'POST' ) {
 		req.write(data);
 	}
@@ -94,7 +97,7 @@ function readFromHttp(urlAddress, method, options, callback) {
 /**
  * 文档接口适配
  * @param options {Object} 请求参数对象
- * @param callback {Function} 回调函数 
+ * @param callback {Function} 回调函数
  */
 function interfaceAdapter(options, callback) {
 	if( options.url.indexOf('http') === -1 ) {
@@ -116,33 +119,3 @@ module.exports = {
 	readFromFile : readFromFile,
 	interfaceAdapter : interfaceAdapter
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
