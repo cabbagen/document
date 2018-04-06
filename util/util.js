@@ -7,29 +7,29 @@ var fs = require('fs');
  * @return resultObjet {Object|Array} 文档化的 JSON 对象模型 
  */
 function recordDoc(object) {
-	
-	if( checkType(object) === 'Object' ) {
-		if( Object.keys(object).length > 0 ) {
-			for(var prop in object) {
-				object[prop] = recordDoc(object[prop]);
-			}
-		} else {
-			// 什么也不做 ...
-		}
-	} else if( checkType(object) === 'Array' ) {
-		if( object.length > 0 ) {
-			object.forEach(function(value, index) {
-				value = recordDoc(value);
-			});
-		} else {
-			// 什么也不做 ...
-		}
-	} else {
-		object = object + '      [ ' + checkType(object) + ' ]';
-	}
-	
-	return object;
-	
+    
+    if( checkType(object) === 'Object' ) {
+        if( Object.keys(object).length > 0 ) {
+            for(var prop in object) {
+                object[prop] = recordDoc(object[prop]);
+            }
+        } else {
+            // 什么也不做 ...
+        }
+    } else if( checkType(object) === 'Array' ) {
+        if( object.length > 0 ) {
+            object.forEach(function(value, index) {
+                value = recordDoc(value);
+            });
+        } else {
+            // 什么也不做 ...
+        }
+    } else {
+        object = object + '      [ ' + checkType(object) + ' ]';
+    }
+    
+    return object;
+    
 }
 
 
@@ -39,8 +39,8 @@ function recordDoc(object) {
  * @return resultType {String}  返回字段类型
  */
 function checkType(field) {
-	var resultType = '';
-	return resultType = Object.prototype.toString.call(field).slice(8, -1);
+    var resultType = '';
+    return resultType = Object.prototype.toString.call(field).slice(8, -1);
 }
 
 
@@ -50,13 +50,13 @@ function checkType(field) {
  * @param callback {Function} 成功的回调 
  */
 function isExistFile(path, callback) {
-	fs.stat(path, function(err, stat) {
-		if( stat && stat.isFile() ) {
-			callback(true);
-		} else if(err && err.code === 'ENOENT') {
-			callback(false);
-		}
-	});
+    fs.stat(path, function(err, stat) {
+        if( stat && stat.isFile() ) {
+            callback(true);
+        } else if(err && err.code === 'ENOENT') {
+            callback(false);
+        }
+    });
 }
 
 
@@ -66,13 +66,13 @@ function isExistFile(path, callback) {
  * @param callback {Function} 成功的回调
  */
 function isExistDir(path, callback) {
-	fs.stat(path, function(err, stat) {
-		if( stat && stat.isDirectory() ) {
-			callback(true);
-		} else if(err && err.code === 'ENOENT') {
-			callback(false);
-		}
-	});
+    fs.stat(path, function(err, stat) {
+        if( stat && stat.isDirectory() ) {
+            callback(true);
+        } else if(err && err.code === 'ENOENT') {
+            callback(false);
+        }
+    });
 }
 
 /**
@@ -83,23 +83,23 @@ function isExistDir(path, callback) {
  *
  */
 function writeToFile(path, data, callback) {
-	
-	fs.writeFile(path, JSON.stringify(data, null, 4), function(err) {
-		if(err) {
-			console.log(err);
-		} else {
-			callback();
-		}
-	});
-	
+    
+    fs.writeFile(path, JSON.stringify(data, null, 4), function(err) {
+        if(err) {
+            console.log(err);
+        } else {
+            callback();
+        }
+    });
+    
 }
 
 
 
 module.exports = {
-	checkType : checkType,
-	recordDoc : recordDoc,
-	isExistFile : isExistFile,
-	isExistDir : isExistDir,
-	writeToFile : writeToFile
+    checkType : checkType,
+    recordDoc : recordDoc,
+    isExistFile : isExistFile,
+    isExistDir : isExistDir,
+    writeToFile : writeToFile
 };

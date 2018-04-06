@@ -1,61 +1,61 @@
 {
-	"name" : "文档接口说明",
-	"comment" : "XXX 仓库文档接口说明",
-	"pages" : [
-		{
-			"name" : "index",
-			"comment" : "",
-			"interfaces" : [
-				{
-					"name" : "index",
-					"comment" : "",
-					"url" : "./demo.json",
-					"method" : "",
-					"data" : null
-				}
-			]
-		},
-		{
-			"name" : "list",
-			"comment" : "list page",
-			"interfaces" : [
-				{
-					"name" : "接口1",
-					"comment" : "接口1",
-					"url" : "http://www.project.com:8080/phpDemo/admin/index.php",
-					"method" : "GET",
-					"data" : {
-						"name" : "xiaoxiao"
-					}
-				},
-				{
-					"name" : "接口2",
-					"comment" : "接口2",
-					"url" : "http://www.project.com:8080/phpDemo/admin/index.php",
-					"method" : "GET",
-					"data" : null
-				}
-			]
-		},
-		{
-			"name" : "demo",
-			"comment" : "demo page",
-			"interfaces" : []
-		},
-		{
-			"name" : "detail",
-			"comment" : "detail page",
-			"interfaces" : [
-				{
-					"name" : "demo interfaces",
-					"comment" : "demo interfaces",
-					"url" : "http://www.project.com:8080/phpDemo/admin/demo.php",
-					"method" : "POST",
-					"data" : {
-						"name" : "xiaoxiao"
-					}
-				}
-			]
-		}
-	]
+    "name" : "文档接口说明",
+    "comment" : "XXX 仓库文档接口说明",
+    "pages" : [
+        {
+            "name" : "index",
+            "comment" : "",
+            "interfaces" : [
+                {
+                    "name" : "index",
+                    "comment" : "",
+                    "url" : "./demo.json",
+                    "method" : "",
+                    "data" : null
+                }
+            ]
+        },
+        {
+            "name" : "list",
+            "comment" : "list page",
+            "interfaces" : [
+                {
+                    "name" : "接口1",
+                    "comment" : "接口1",
+                    "url" : "http://www.project.com:8080/phpDemo/admin/index.php",
+                    "method" : "GET",
+                    "data" : {
+                        "name" : "xiaoxiao"
+                    }
+                },
+                {
+                    "name" : "接口2",
+                    "comment" : "接口2",
+                    "url" : "http://www.project.com:8080/phpDemo/admin/index.php",
+                    "method" : "GET",
+                    "data" : null
+                }
+            ]
+        },
+        {
+            "name" : "demo",
+            "comment" : "demo page",
+            "interfaces" : []
+        },
+        {
+            "name" : "detail",
+            "comment" : "detail page",
+            "interfaces" : [
+                {
+                    "name" : "demo interfaces",
+                    "comment" : "demo interfaces",
+                    "url" : "http://www.project.com:8080/phpDemo/admin/demo.php",
+                    "method" : "POST",
+                    "data" : {
+                        "name" : "xiaoxiao"
+                    }
+                }
+            ]
+        }
+    ]
 }

@@ -1,8 +1,8 @@
 
 var fs = require('fs'),
-	http = require('http'),
-	url = require('url'),
-	queryString = require('querystring');
+    http = require('http'),
+    url = require('url'),
+    queryString = require('querystring');
 
 
 var util = require('./util.js');
@@ -14,19 +14,19 @@ var util = require('./util.js');
  *
  */
 function readFromFile(fromPath, callback) {
-	fs.readFile(fromPath , 'utf8', function(err, data) {
-		if(err) {
-			console.log(err);
-		} else {
-			try {
-				var myData = JSON.parse(data);
-				callback(myData);
-			} catch(e) {
-				console.log(e);
-				throw new Error('使用 JSON 进行数据交换');
-			}
-		}
-	});
+    fs.readFile(fromPath , 'utf8', function(err, data) {
+        if(err) {
+            console.log(err);
+        } else {
+            try {
+                var myData = JSON.parse(data);
+                callback(myData);
+            } catch(e) {
+                console.log(e);
+                throw new Error('使用 JSON 进行数据交换');
+            }
+        }
+    });
 }
 
 
@@ -39,58 +39,58 @@ function readFromFile(fromPath, callback) {
  *
  */
 function readFromHttp(urlAddress, method, options, callback) {
-	var data = undefined,
-		urlObj = url.parse(urlAddress),
-		headerInfo = {
-			hostname : urlObj.hostname,
-			port : urlObj.port,
-			path : urlObj.path
-		};
+    var data = undefined,
+        urlObj = url.parse(urlAddress),
+        headerInfo = {
+            hostname : urlObj.hostname,
+            port : urlObj.port,
+            path : urlObj.path
+        };
 
-	if(typeof options !== 'undefined') {
-		data = queryString.stringify(options);
-	}
+    if(typeof options !== 'undefined') {
+        data = queryString.stringify(options);
+    }
 
-	if(method === 'GET' || method === 'get') {
-		if(data) {
-			headerInfo['path'] += '?' + data;
-		}
-		headerInfo['method'] = 'GET';
-	}
+    if(method === 'GET' || method === 'get') {
+        if(data) {
+            headerInfo['path'] += '?' + data;
+        }
+        headerInfo['method'] = 'GET';
+    }
 
-	if(method === 'POST' || method === 'post') {
-		headerInfo['method'] = 'POST';
-		headerInfo['headers'] = {
-			'Content-Type' : 'application/x-www-form-urlencoded',
-			'Content-Length' : data.length
-		}
+    if(method === 'POST' || method === 'post') {
+        headerInfo['method'] = 'POST';
+        headerInfo['headers'] = {
+            'Content-Type' : 'application/x-www-form-urlencoded',
+            'Content-Length' : data.length
+        }
 
-	}
+    }
 
-	var req = http.request(headerInfo, function(res) {
-		var myChunk = '';
-		res.setEncoding('utf8');
-		res.on('data', function(chunk) {
-			myChunk += chunk;
-		});
-		res.on('end', function() {
-			try {
-				callback( JSON.parse(myChunk) );
-			} catch(e) {
-				console.log(e);
-				throw new Error('使用 JSON 进行数据交换');
-			}
-		});
-	});
+    var req = http.request(headerInfo, function(res) {
+        var myChunk = '';
+        res.setEncoding('utf8');
+        res.on('data', function(chunk) {
+            myChunk += chunk;
+        });
+        res.on('end', function() {
+            try {
+                callback( JSON.parse(myChunk) );
+            } catch(e) {
+                console.log(e);
+                throw new Error('使用 JSON 进行数据交换');
+            }
+        });
+    });
 
-	req.on('error', function(err) {
-		console.log(err);
-	});
+    req.on('error', function(err) {
+        console.log(err);
+    });
 
-	if( headerInfo['method'] === 'POST' ) {
-		req.write(data);
-	}
-	req.end();
+    if( headerInfo['method'] === 'POST' ) {
+        req.write(data);
+    }
+    req.end();
 }
 
 
@@ -100,22 +100,22 @@ function readFromHttp(urlAddress, method, options, callback) {
  * @param callback {Function} 回调函数
  */
 function interfaceAdapter(options, callback) {
-	if( options.url.indexOf('http') === -1 ) {
-		readFromFile(options.url, function(data) {
-			options['returnData'] = data;
-			callback( util.recordDoc(options) );
-		});
-	} else {
-		readFromHttp(options.url, options.method, options.data, function(chunk) {
-			options['returnData'] = chunk;
-			callback( util.recordDoc(options) );
-		});
-	}
+    if( options.url.indexOf('http') === -1 ) {
+        readFromFile(options.url, function(data) {
+            options['returnData'] = data;
+            callback( util.recordDoc(options) );
+        });
+    } else {
+        readFromHttp(options.url, options.method, options.data, function(chunk) {
+            options['returnData'] = chunk;
+            callback( util.recordDoc(options) );
+        });
+    }
 }
 
 
 module.exports = {
-	readFromHttp : readFromHttp,
-	readFromFile : readFromFile,
-	interfaceAdapter : interfaceAdapter
+    readFromHttp : readFromHttp,
+    readFromFile : readFromFile,
+    interfaceAdapter : interfaceAdapter
 };
